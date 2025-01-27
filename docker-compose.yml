@@ -1,0 +1,38 @@
+services:
+  # Contenedor para el frontend
+  frontend:
+    build:
+      context: ./frontend  # Ruta donde está tu código frontend
+    ports:
+      - "8000:80"  # Expone el puerto 80 del contenedor al puerto 8000 de tu máquina
+    depends_on:
+      - backend
+
+  # Contenedor para el backend (Spring Boot)
+  backend:
+    build:
+      context: ./backend  # Ruta donde está tu aplicación Spring Boot
+    ports:
+      - "7000:8080"  # Expone el puerto 8080 del contenedor al puerto 7000 de tu máquina
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/demo  # Configura la URL de conexión con la base de datos
+      SPRING_DATASOURCE_USERNAME: root  # Usuario de la base de datos
+      SPRING_DATASOURCE_PASSWORD: root  # Contraseña de la base de datos
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update  # Configuración de Hibernate
+
+  # Contenedor para la base de datos MySQL
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Contraseña de root para MySQL
+      MYSQL_DATABASE: demo  # Nombre de la base de datos a crear
+    ports:
+      - "3306:3306"  
+    volumes:
+      - mysql-data:/var/lib/mysql  # Para persistencia de datos
+
+# Volumen para la base de datos
+volumes:
+  mysql-data:

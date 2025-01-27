@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Usuarios</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5 text-center">Gestión de Usuarios</h1>
+        
+        <!-- Formulario de usuario -->
+        <form id="usuarioForm" class="mt-4">
+            <div class="form-group">
+                <input type="text" id="nombre" class="form-control" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="apellidos" class="form-control" placeholder="Apellidos" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" class="form-control" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="telefono" class="form-control" placeholder="Teléfono" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Agregar Usuario</button>
+        </form>
+
+        <!-- Lista de usuarios -->
+        <h2 class="mt-5">Lista de Usuarios</h2>
+        <ul id="usuariosList" class="list-group mt-3">
+            <!-- Los usuarios se agregarán aquí dinámicamente -->
+        </ul>
+    </div>
+
+    <!-- Enlace a Bootstrap JS y dependencias -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="app.js"></script>
+</body>
+</html>
