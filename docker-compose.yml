@@ -2,7 +2,7 @@
 services:
   # Contenedor para la base de datos MySQL
   db:
-    image: mysql:8.0
+    image: PabloTA85/mysql:v1.1cd
     environment:
       MYSQL_ROOT_PASSWORD: root  # Contraseña de root para MySQL
       MYSQL_DATABASE: demo  # Nombre de la base de datos
