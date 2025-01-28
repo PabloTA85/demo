@@ -8,7 +8,7 @@ WORKDIR /app
 COPY target/demo-0.0.1-SNAPSHOT.jar app.jar
 
 # Exponer el puerto en el que corre tu API
-EXPOSE 7000
+EXPOSE 8080
 
-# Comando para correr la aplicación Spring Boot
+# Comando para ejecutar la aplicación Spring Boot sin esperar
 CMD ["java", "-jar", "app.jar"]

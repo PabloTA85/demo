@@ -1,38 +1,40 @@
+
 services:
+  # Contenedor para la base de datos MySQL
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root  # Contraseña de root para MySQL
+      MYSQL_DATABASE: demo  # Nombre de la base de datos
+    ports:
+      - "3306:3306"  # Exponemos el puerto 3306 del contenedor al puerto 3306 de tu máquina local
+    volumes:
+      - mysql-data:/var/lib/mysql  # Para persistencia de datos
+
   # Contenedor para el frontend
   frontend:
     build:
       context: ./frontend  # Ruta donde está tu código frontend
     ports:
-      - "8000:80"  # Expone el puerto 80 del contenedor al puerto 8000 de tu máquina
+      - "8000:8000"  # Exponemos el puerto 8000 del contenedor al puerto 8000 de tu máquina local
     depends_on:
-      - backend
+      - backend  # Espera a que el backend esté disponible antes de iniciar
+    # Aquí podrían añadirse otras configuraciones si se usa un proxy o configuraciones adicionales
 
   # Contenedor para el backend (Spring Boot)
   backend:
     build:
       context: ./backend  # Ruta donde está tu aplicación Spring Boot
     ports:
-      - "7000:8080"  # Expone el puerto 8080 del contenedor al puerto 7000 de tu máquina
+      - "8080:8080"  # Exponemos el puerto 8080 del contenedor al puerto 8080 de tu máquina local
     depends_on:
-      - db
+      - db  # Espera a que la base de datos esté disponible antes de iniciar
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/demo  # Configura la URL de conexión con la base de datos
-      SPRING_DATASOURCE_USERNAME: root  # Usuario de la base de datos
-      SPRING_DATASOURCE_PASSWORD: root  # Contraseña de la base de datos
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/demo  # Configuración para conectar con la base de datos
+      SPRING_DATASOURCE_USERNAME: root  # Usuario para la base de datos
+      SPRING_DATASOURCE_PASSWORD: root  # Contraseña para la base de datos
       SPRING_JPA_HIBERNATE_DDL_AUTO: update  # Configuración de Hibernate
-
-  # Contenedor para la base de datos MySQL
-  db:
-    image: mysql:8.0
-    environment:
-      MYSQL_ROOT_PASSWORD: root  # Contraseña de root para MySQL
-      MYSQL_DATABASE: demo  # Nombre de la base de datos a crear
-    ports:
-      - "3306:3306"  
-    volumes:
-      - mysql-data:/var/lib/mysql  # Para persistencia de datos
 
 # Volumen para la base de datos
 volumes:
-  mysql-data:
+  mysql-data:  # Para persistir los datos de MySQL entre reinicios
