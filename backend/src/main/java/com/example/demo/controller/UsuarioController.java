@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -12,15 +13,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/usuarios")
+@CrossOrigin(origins = "*") // Permitir acceso desde el frontend
 public class UsuarioController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+
     // Obtener todos los usuarios
     @GetMapping
     public List<usuario> obtenerUsuarios() {
         return usuarioRepository.findAll();
+    }
+
+    // Manejar solicitudes preflight
+    @RequestMapping(method = RequestMethod.OPTIONS)
+    public ResponseEntity<?> handleOptions() {
+        return ResponseEntity.ok().build();
     }
 
     // Obtener un usuario por ID

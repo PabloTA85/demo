@@ -73,3 +73,15 @@
 		</plugins>
 	</build>
 </project>
+
+<!-- Spring session core-->
+<!-- <dependency>
+    <groupId>org.springframework.session</groupId>
+    <artifactId>spring-session-core</artifactId>
+</dependency> -->
+
+<!--Springsecurity6 thymeleaf-->
+<!-- <dependency>
+    <groupId>org.thymeleaf.extras</groupId>
+    <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+</dependency> --> 

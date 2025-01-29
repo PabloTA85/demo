@@ -1,8 +1,7 @@
-
 services:
   # Contenedor para la base de datos MySQL
   db:
-    image: PabloTA85/mysql:v1.1cd
+    image: PabloTA85/mysql:v1.1
     environment:
       MYSQL_ROOT_PASSWORD: root  # Contraseña de root para MySQL
       MYSQL_DATABASE: demo  # Nombre de la base de datos
@@ -14,7 +13,7 @@ services:
   # Contenedor para el frontend
   frontend:
     build:
-      context: ./frontend  # Ruta donde está tu código frontend
+      context: ./frontend  # Indica el contexto donde se encuentra el Dockerfile
     ports:
       - "8000:8000"  # Exponemos el puerto 8000 del contenedor al puerto 8000 de tu máquina local
     depends_on:
@@ -24,7 +23,7 @@ services:
   # Contenedor para el backend (Spring Boot)
   backend:
     build:
-      context: ./backend  # Ruta donde está tu aplicación Spring Boot
+      context: ./backend  # Indica el contexto donde se encuentra el Dockerfile
     ports:
       - "8080:8080"  # Exponemos el puerto 8080 del contenedor al puerto 8080 de tu máquina local
     depends_on:
